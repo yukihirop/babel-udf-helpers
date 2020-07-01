@@ -1,0 +1,10 @@
+{
+  "name": "babel-udf-helpers",
+  "version": "1.0.0",
+  "description": "Provides methods for using UDF Helpers in Babel plugin development",
+  "main": "lib/index.js",
+  "repository": "git@github.com:yukihirop/babel-udf-helpers.git",
+  "author": "yukihirop",
+  "license": "MIT",
+  "private": false
+}
