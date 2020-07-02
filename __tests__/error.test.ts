@@ -1,3 +1,4 @@
+import { useDangerousUDFHelpers } from '../src';
 import { AlreadyImplementedError } from './../src/errors';
 import { clearAll as clearAllHelpers } from '../src/store';
 import printer from './printer';
@@ -18,22 +19,88 @@ describe('addUDFHelper', () => {
     const type = 'error';
 
     describe('core_ext', () => {
+      describe('babelImplemented', () => {
+        // prettier-ignore
+        const cases = [
+          {
+            method: 'PluginPass#addUDFHelper',
+            preFunc: (pass, helpers) => {
+              try {
+                pass.constructor.prototype.addUDFHelper = function () { };
+                useDangerousUDFHelpers(pass, helpers);
+              } catch (e) {
+                pass.constructor.prototype.addUDFHelper = undefined;
+                throw e
+              }
+            }
+          },
+          {
+            method: 'PluginPass#listUDFHelper',
+            preFunc: (pass, helpers) => {
+              try {
+                pass.constructor.prototype.listUDFHelper = function () { };
+                useDangerousUDFHelpers(pass, helpers);
+              } catch (e) {
+                pass.constructor.prototype.listUDFHelper = undefined;
+                throw e
+              }
+            }
+          },
+          {
+            method: 'BabelFile#addUDFHelper',
+            preFunc: (pass, helpers) => {
+              try {
+                pass.file.constructor.prototype.addUDFHelper = function () { };
+                useDangerousUDFHelpers(pass, helpers);
+              } catch (e) {
+                pass.file.constructor.prototype.addUDFHelper = undefined;
+                throw e
+              }
+            }
+          },
+          {
+            method: 'BabelFile#listUDFHelper',
+            preFunc: (pass, helpers) => {
+              try {
+                pass.file.constructor.prototype.listUDFHelper = function () { };
+                useDangerousUDFHelpers(pass, helpers);
+              } catch (e) {
+                pass.file.constructor.prototype.listUDFHelper = undefined;
+                throw e
+              }
+            }
+          },
+        ];
+
+        for (const c of cases) {
+          const { method, preFunc } = c;
+          test(method, () => {
+            const dir = 'declaration';
+            const helpers = require(inputFixturePath(['basic', dir]));
+            const programFunc = (pass) => pass.addUDFHelper('declaration');
+
+            // prettier-ignore
+            expect(() => { printer({ helpers, programFunc, preFunc }); }).toThrowError(new AlreadyImplementedError(
+              `unknown:\
+ \nThis tool cannot be used. officially supported.
+Please see the official documentation.
+https://babeljs.io/docs/en/babel-helpers
+`));
+            // prettier-ignore
+            expect(() => { printer({ helpers, programFunc, preFunc }); }).toThrowErrorMatchingSnapshot();
+          });
+        }
+      });
 
       test('babelAlreadyDefined', () => {
         const dir = 'babelAlreadyDefined';
         const helpers = require(inputFixturePath([type, dir]));
         const programFunc = (pass) => pass.addUDFHelper('objectWithoutProperties');
 
-        expect(() => {
-          printer({ helpers, programFunc });
-        }).toThrowError(
-          new AlreadyImplementedError(
-            'unknown: objectWithoutProperties cannot be used because it is supported by babel official.\nPlease change the name of the helper.'
-          )
-        );
-        expect(() => {
-          printer({ helpers, programFunc });
-        }).toThrowErrorMatchingSnapshot();
+        // prettier-ignore
+        expect(() => { printer({ helpers, programFunc }); }).toThrowError(new AlreadyImplementedError('unknown: objectWithoutProperties cannot be used because it is supported by babel official.\nPlease change the name of the helper.'));
+        // prettier-ignore
+        expect(() => { printer({ helpers, programFunc }); }).toThrowErrorMatchingSnapshot();
       });
     });
 

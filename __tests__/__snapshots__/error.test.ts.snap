@@ -18,3 +18,35 @@ exports[`addUDFHelper error core_ext babelAlreadyDefined 1`] = `
 "unknown: objectWithoutProperties cannot be used because it is supported by babel official.
 Please change the name of the helper."
 `;
+
+exports[`addUDFHelper error core_ext babelImplemented BabelFile#addUDFHelper 1`] = `
+"unknown: 
+This tool cannot be used. officially supported.
+Please see the official documentation.
+https://babeljs.io/docs/en/babel-helpers
+"
+`;
+
+exports[`addUDFHelper error core_ext babelImplemented BabelFile#listUDFHelper 1`] = `
+"unknown: 
+This tool cannot be used. officially supported.
+Please see the official documentation.
+https://babeljs.io/docs/en/babel-helpers
+"
+`;
+
+exports[`addUDFHelper error core_ext babelImplemented PluginPass#addUDFHelper 1`] = `
+"unknown: 
+This tool cannot be used. officially supported.
+Please see the official documentation.
+https://babeljs.io/docs/en/babel-helpers
+"
+`;
+
+exports[`addUDFHelper error core_ext babelImplemented PluginPass#listUDFHelper 1`] = `
+"unknown: 
+This tool cannot be used. officially supported.
+Please see the official documentation.
+https://babeljs.io/docs/en/babel-helpers
+"
+`;
