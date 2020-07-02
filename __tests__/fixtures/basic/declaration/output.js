@@ -1,0 +1,1 @@
+function _declaration() { console.log("declaration"); }

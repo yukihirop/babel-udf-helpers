@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addUDFHelper basic declaration 1`] = `"function _declaration() { console.log(\\"declaration\\"); }"`;
+
+exports[`addUDFHelper basic dependencies 1`] = `
+"function _dependencies() { cild1() || _child2(); }
+
+;
+
+function _child2() { _grandchild(); }
+
+;
+
+function _grandchild() { return \\"grandchild\\"; }
+
+;
+
+function _child() { return \\"child1\\"; }
+
+;"
+`;
+
+exports[`addUDFHelper basic rename 1`] = `
+"function _rename2() { console.log(\\"rename\\"); }
+
+function _rename() {
+  return \\"path.replaceWith\\";
+}"
+`;
+
+exports[`listUDFHelper basic officialMix 1`] = `
+Object {
+  "available": Array [
+    "officialMix",
+    "child1",
+    "child2",
+    "grandchild",
+  ],
+  "unavailable": Array [
+    "objectWithoutPropertiesLoose",
+    "objectWithoutProperties",
+  ],
+}
+`;
