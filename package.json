@@ -3,8 +3,37 @@
   "version": "1.0.0",
   "description": "Provides methods for using UDF Helpers in Babel plugin development",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "repository": "git@github.com:yukihirop/babel-udf-helpers.git",
   "author": "yukihirop",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "directories": {
+    "example": "./example",
+    "test": "./__tests__",
+    "lib": "./lib"
+  },
+  "scripts": {
+    "fmt": "prettier --write **/src/**/*.ts **/__tests__/fixtures/**/input.js **/__tests__/*.test.ts",
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage --ci --runInBand",
+    "test:debug": "node --inspect -r ts-node/register ./node_modules/.bin/jest --verbose --runInBand"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/template": "^7.10.4",
+    "@babel/traverse": "^7.10.4",
+    "@babel/types": "^7.10.4",
+    "@types/babel-types": "^7.0.7",
+    "@types/babel__core": "^7.1.9",
+    "@types/babel__template": "^7.0.2",
+    "@types/babel__traverse": "^7.0.12",
+    "@types/jest": "^26.0.3",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
 }
