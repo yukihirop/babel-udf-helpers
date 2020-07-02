@@ -1,4 +1,4 @@
-import { clearAll as clearAllHelpers } from '../src/store';
+import { clearAll as clearAllHelpers } from '../store';
 import { writeFile } from 'fs';
 import printer from './printer';
 import { inputFixturePath, outputFixturePath } from './utils';

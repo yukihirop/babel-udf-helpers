@@ -1,6 +1,6 @@
-import { useDangerousUDFHelpers } from '../src';
-import { AlreadyImplementedError } from './../src/errors';
-import { clearAll as clearAllHelpers } from '../src/store';
+import { useDangerousUDFHelpers } from '../';
+import { AlreadyImplementedError } from './../errors';
+import { clearAll as clearAllHelpers } from '../store';
 import printer from './printer';
 import { inputFixturePath } from './utils';
 

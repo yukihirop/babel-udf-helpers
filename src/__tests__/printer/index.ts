@@ -1,6 +1,6 @@
 import * as parser from '@babel/parser';
 import { transformFromAstSync } from '@babel/core';
-import { UDFHelpers } from '../../src';
+import { UDFHelpers } from '../../';
 import createBabelPlugin from './plugin';
 import { ProgramFunc, PreFunc } from './types';
 

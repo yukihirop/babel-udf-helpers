@@ -1,4 +1,4 @@
-import { UDFHelpers } from './../../src/types';
+import { UDFHelpers } from './../../types';
 import { NodePath } from '@babel/traverse';
 
 export type BabelTypes = {

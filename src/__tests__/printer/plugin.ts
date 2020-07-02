@@ -1,6 +1,6 @@
 import { NodePath } from '@babel/traverse';
 import { BabelTypes, ProgramFunc, PreFunc } from './types';
-import { useDangerousUDFHelpers, UDFHelpers } from '../../src'
+import { useDangerousUDFHelpers, UDFHelpers } from '../../'
 
 export default function createBabelPlugin(helpers: UDFHelpers, programFunc: ProgramFunc, preFunc?: PreFunc) {
   // prettier-ignore
