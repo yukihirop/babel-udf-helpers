@@ -1,0 +1,22 @@
+name: deploy docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: vuepress-deploy
+        uses: jenkey2011/vuepress-deploy@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TARGET_REPO: yukihirop/babel-udf-helpers
+          TARGET_BRANCH: gh-pages
+          BUILD_SCRIPT: cd docs && yarn && yarn build && cd -
+          BUILD_DIR: docs/.vuepress/dist/

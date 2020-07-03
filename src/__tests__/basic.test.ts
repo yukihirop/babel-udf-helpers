@@ -1,4 +1,4 @@
-import { clearAll as clearAllHelpers } from '../store';
+import { clearAllUDFHelpers } from '../';
 import { writeFile } from 'fs';
 import printer from './printer';
 import { inputFixturePath, outputFixturePath } from './utils';
@@ -10,7 +10,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.clearAllMocks();
-  clearAllHelpers();
+  clearAllUDFHelpers();
 });
 
 describe('addUDFHelper', () => {

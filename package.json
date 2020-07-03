@@ -18,7 +18,9 @@
     "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage --ci --runInBand",
-    "test:debug": "node --inspect -r ts-node/register ./node_modules/.bin/jest --verbose --runInBand"
+    "test:debug": "node --inspect -r ts-node/register ./node_modules/.bin/jest --verbose --runInBand",
+    "docs:dev": "cd docs && yarn dev",
+    "docs:build": "cd docs && yarn build"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

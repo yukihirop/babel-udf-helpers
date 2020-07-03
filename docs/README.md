@@ -54,10 +54,6 @@ helpers.importHelper = helper`
 `
 ```
 
-## 📚 Documents
-
-Full docs are available at https://yukihirop.github.io/babel-udf-helpers
-
 ## ⚽ Example
 
 Run the plugin test with `babel-udf-helpers` in typescript and javascript.
