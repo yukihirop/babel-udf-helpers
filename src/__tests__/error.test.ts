@@ -1,6 +1,6 @@
 import { useDangerousUDFHelpers } from '../';
 import { AlreadyImplementedError } from './../errors';
-import { clearAll as clearAllHelpers } from '../store';
+import { clearAllUDFHelpers } from '../';
 import printer from './printer';
 import { inputFixturePath } from './utils';
 
@@ -11,7 +11,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.clearAllMocks();
-  clearAllHelpers();
+  clearAllUDFHelpers();
 });
 
 describe('addUDFHelper', () => {

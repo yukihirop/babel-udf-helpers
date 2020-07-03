@@ -2,7 +2,7 @@ import template from '@babel/template';
 import * as t from '@babel/types';
 
 export * from './types';
-export { clearAll as clearAllHelpers } from './store';
+export { clearAll as clearAllUDFHelpers } from './store';
 export { default as useDangerousUDFHelpers } from './core_ext';
 
 export const helper = (tpl: TemplateStringsArray) => ({
