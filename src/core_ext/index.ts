@@ -30,7 +30,7 @@ https://babeljs.io/docs/en/babel-helpers
      */
     Object.assign(helpersStore, helpers.default ? helpers.default : helpers);
   } else {
-    throw new NotFoundError('Not found "UDF helpers"');
+    throw new NotFoundError('Not found UDF helpers.');
   }
 
   Object.defineProperty(pass.file, 'addUDFHelper', {

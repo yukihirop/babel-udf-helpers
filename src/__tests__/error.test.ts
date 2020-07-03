@@ -1,5 +1,5 @@
 import { useDangerousUDFHelpers } from '../';
-import { AlreadyImplementedError } from './../errors';
+import { AlreadyImplementedError, NotFoundError } from './../errors';
 import { clearAllUDFHelpers } from '../';
 import printer from './printer';
 import { inputFixturePath } from './utils';
@@ -91,6 +91,15 @@ https://babeljs.io/docs/en/babel-helpers
           });
         }
       });
+      
+      test('Not found UDF helpers', () => {
+        const programFunc = (pass) => pass.addUDFHelper('objectWithoutProperties');
+        
+        // prettier-ignore
+        expect(() => { printer({ programFunc } as any); }).toThrowError(new NotFoundError('unknown: Not found UDF helpers.'));
+        // prettier-ignore
+        expect(() => { printer({ programFunc } as any); }).toThrowErrorMatchingSnapshot();
+      })
 
       test('babelAlreadyDefined', () => {
         const dir = 'babelAlreadyDefined';
@@ -107,13 +116,13 @@ https://babeljs.io/docs/en/babel-helpers
     describe('DependencyResolvePlugin', () => {
       // prettier-ignore
       const cases = [
-        { dir: 'doNotExist', err: new Error('unknown: Unknown helper doNotExist') },
+        { dir: 'doNotExist', err: new ReferenceError('unknown: Unknown helper doNotExist') },
         { dir: 'importNamed', err: new SyntaxError('unknown: UDF Helpers can only import a default value (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'doNotGiveName', err: new SyntaxError('unknown: UDF Helpers should give names to their exported func declaration (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'expression', err: new SyntaxError('unknown: UDF Helpers must be a function declaration (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'exportAll', err: new SyntaxError('unknown: UDF Helpers can only export default (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'exportNamed', err: new SyntaxError('unknown: UDF Helpers can only export default (This is an error on an internal node. Probably an internal error.)') },
-        { dir: 'doNotExportDefault', err: new Error('unknown: UDF Helpers must default-export something.') },
+        { dir: 'doNotExportDefault', err: new SyntaxError('unknown: UDF Helpers must default-export something.') },
       ];
 
       for (const c of cases) {

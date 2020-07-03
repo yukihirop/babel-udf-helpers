@@ -13,7 +13,7 @@ export default function DependencyResolve(file: babel.BabelFile, options?: UDFPl
       const name = path.node.source.value;
 
       if (!helpersStore[name]) {
-        throw path.buildCodeFrameError(`Unknown UDF helper ${name}`);
+        throw new ReferenceError(`Unknown UDF helper ${name}`);
       }
 
       if (
@@ -74,5 +74,5 @@ export default function DependencyResolve(file: babel.BabelFile, options?: UDFPl
 
   traverse(file.ast, visitor as any, file.scope);
 
-  if (!opts['iExportName']) throw new Error('UDF Helpers must default-export something.');
+  if (!opts['iExportName']) throw new SyntaxError('UDF Helpers must default-export something.');
 }

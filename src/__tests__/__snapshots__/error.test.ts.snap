@@ -14,6 +14,8 @@ exports[`addUDFHelper error DependencyResolvePlugin expression 1`] = `"unknown: 
 
 exports[`addUDFHelper error DependencyResolvePlugin importNamed 1`] = `"unknown: UDF Helpers can only import a default value (This is an error on an internal node. Probably an internal error.)"`;
 
+exports[`addUDFHelper error core_ext Not found UDF helpers 1`] = `"unknown: Not found UDF helpers."`;
+
 exports[`addUDFHelper error core_ext babelAlreadyDefined 1`] = `
 "unknown: objectWithoutProperties cannot be used because it is supported by babel official.
 Please change the name of the helper."
