@@ -3,4 +3,4 @@ coverage
 yarn-error.log
 .vscode
 lib
-yarn.lock
+.node-version

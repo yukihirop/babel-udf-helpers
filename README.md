@@ -14,6 +14,11 @@ The usability is like that of @babel/helpers.
 npm install --save-dev babel-udf-helpers
 ```
 
+## ❤️ Support Version
+
+- node.js (>=10.15)
+- typescript target (ES2018)
+
 ## 📖 Usage
 
 Use in your babel plugin as follows.  

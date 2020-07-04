@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "repository": "git@github.com:yukihirop/babel-udf-helpers.git",
+  "homepage": "https://yukihirop.github.io/babel-udf-helpers",
+  "bugs": {
+    "url": "https://github.com/yukihirop/babel-udf-helpers/issues"
+  },
   "author": "yukihirop",
   "license": "MIT",
   "private": false,
@@ -13,6 +17,9 @@
     "test": "./__tests__",
     "lib": "./lib"
   },
+  "engines": {
+    "node": ">=10.15"
+  },
   "scripts": {
     "fmt": "prettier --write **/src/**/*.ts **/__tests__/fixtures/**/input.js **/__tests__/*.test.ts",
     "build": "tsc",
@@ -20,8 +27,17 @@
     "test:coverage": "jest --coverage --ci --runInBand",
     "test:debug": "node --inspect -r ts-node/register ./node_modules/.bin/jest --verbose --runInBand",
     "docs:dev": "cd docs && yarn dev",
-    "docs:build": "cd docs && yarn build"
+    "docs:build": "cd docs && yarn build && cd -"
   },
+  "keywords": [
+    "babel",
+    "babel-helpers",
+    "@babel/core",
+    "@babel/helpers",
+    "udf",
+    "UDF",
+    "helpers"
+  ],
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/template": "^7.10.4",
