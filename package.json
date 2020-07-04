@@ -1,6 +1,6 @@
 {
   "name": "babel-udf-helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides methods for using UDF Helpers in Babel plugin development",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
