@@ -1,6 +1,12 @@
 ## Change Log
 
-## 1.0.0
+## v1.0.1
+
+2020-07-02
+
+- specify files in package.json
+
+## v1.0.0
 
 2020-07-02
 
