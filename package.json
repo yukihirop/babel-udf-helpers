@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "repository": "git@github.com:yukihirop/babel-udf-helpers.git",
+  "homepage": "https://yukihirop.github.io/babel-udf-helpers",
+  "bugs": {
+    "url": "https://github.com/yukihirop/babel-udf-helpers/issues"
+  },
   "author": "yukihirop",
   "license": "MIT",
   "private": false,
@@ -25,6 +29,15 @@
     "docs:dev": "cd docs && yarn dev",
     "docs:build": "cd docs && yarn build && cd -"
   },
+  "keywords": [
+    "babel",
+    "babel-helpers",
+    "@babel/core",
+    "@babel/helpers",
+    "udf",
+    "UDF",
+    "helpers"
+  ],
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/template": "^7.10.4",
