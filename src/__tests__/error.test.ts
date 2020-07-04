@@ -91,15 +91,15 @@ https://babeljs.io/docs/en/babel-helpers
           });
         }
       });
-      
+
       test('Not found UDF helpers', () => {
         const programFunc = (pass) => pass.addUDFHelper('objectWithoutProperties');
-        
+
         // prettier-ignore
         expect(() => { printer({ programFunc } as any); }).toThrowError(new NotFoundError('unknown: Not found UDF helpers.'));
         // prettier-ignore
         expect(() => { printer({ programFunc } as any); }).toThrowErrorMatchingSnapshot();
-      })
+      });
 
       test('babelAlreadyDefined', () => {
         const dir = 'babelAlreadyDefined';
