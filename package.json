@@ -13,6 +13,9 @@
     "test": "./__tests__",
     "lib": "./lib"
   },
+  "engines": {
+    "node": ">=10.15"
+  },
   "scripts": {
     "fmt": "prettier --write **/src/**/*.ts **/__tests__/fixtures/**/input.js **/__tests__/*.test.ts",
     "build": "tsc",
