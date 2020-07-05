@@ -33,6 +33,7 @@ module.exports = {
       ['/', 'Home', { collapsable: false }],
       ['/motivation/', 'Motivation', { collapsable: false }],
       ['/usage/', 'Usage', { collapsable: false }],
+      ['/api/', 'API', { collapsable: false }],
       ['/define-udf-helpers/', 'Define UDF Helpers', { collapsable: false }],
       ['/error-handling/', 'Error Handling', { collapsable: false }],
     ],
