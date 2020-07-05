@@ -1,13 +1,11 @@
 # babel-udf-helpers
 
 [![npm version](https://badge.fury.io/js/babel-udf-helpers.svg)](https://badge.fury.io/js/babel-udf-helpers)
-
 ![deploy docs](https://github.com/yukihirop/babel-udf-helpers/workflows/deploy%20docs/badge.svg)
-
 [![CircleCI](https://circleci.com/gh/yukihirop/babel-udf-helpers.svg?style=svg)](https://circleci.com/gh/yukihirop/babel-udf-helpers)
 
 
-A tool to create user-defined helpers that can be used with babel plugin.  
+A tool to create user-defined helpers that can be used in your babel plugin.  
 The usability is like that of @babel/helpers.  
 
 ## 📦 Installation

@@ -8,7 +8,7 @@ However, some users may have encountered the following issues.
 * Global variable name collision in code trying to traverse.  
 
 The problem that can't be solved without writing a lot of AST can be solved to some extent by using `@babel/template`,
-but the name conflict of global variables cannot be solved.  
+but the name conflict of global variables cannot be solved and the same code tends to be repeated because you cannot define dependencies between functions.
 
 `@babel/helpers` solved both problems. But it didn't give the user a way to define helpers.  
 
