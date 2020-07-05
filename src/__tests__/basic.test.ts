@@ -46,7 +46,7 @@ describe('addUDFHelper', () => {
     test('multi plugins', () => {
       const dir = 'dependencies';
       const helpers = require(inputFixturePath([type, dir]));
-      const programFuncs = [(pass) => pass.addUDFHelper(dir)];
+      const programFuncs = [(pass) => pass.addUDFHelper(dir), (pass) => pass.addUDFHelper(dir)];
       // @ts-ignore
       const code = printer({ helpers, programFuncs });
 
