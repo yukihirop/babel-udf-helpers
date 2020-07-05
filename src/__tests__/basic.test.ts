@@ -23,11 +23,11 @@ describe('addUDFHelper', () => {
       test(dir, () => {
         const helpers = require(inputFixturePath([type, dir]));
         // @ts-ignore
-        const programFunc = (pass) => pass.addUDFHelper(dir);
-        const code = printer({ helpers, programFunc });
+        const programFuncs = [(pass) => pass.addUDFHelper(dir)];
+        const code = printer({ helpers, programFuncs });
 
         expect(code).toMatchSnapshot();
-        writeFile(outputFixturePath([type, dir]), code || '', () => {});
+        writeFile(outputFixturePath([type, dir]), code || '', () => { });
       });
     }
 
@@ -35,12 +35,23 @@ describe('addUDFHelper', () => {
       const dir = 'rename';
       const helpers = require(inputFixturePath([type, dir]));
       const content = `function _rename() { return "path.replaceWith" }`;
-      const programFunc = (pass) => pass.addUDFHelper(dir);
+      const programFuncs = [(pass) => pass.addUDFHelper(dir)];
       // @ts-ignore
-      const code = printer({ content, helpers, programFunc });
+      const code = printer({ content, helpers, programFuncs });
 
       expect(code).toMatchSnapshot();
       writeFile(outputFixturePath([type, dir]), code || '', () => {});
+    });
+
+    test('multi plugins', () => {
+      const dir = 'dependencies';
+      const helpers = require(inputFixturePath([type, dir]));
+      const programFuncs = [(pass) => pass.addUDFHelper(dir)];
+      // @ts-ignore
+      const code = printer({ helpers, programFuncs });
+
+      expect(code).toMatchSnapshot();
+      writeFile(outputFixturePath([type, dir]), code || '', () => { });
     });
   });
 });
@@ -52,12 +63,10 @@ describe('listUDFHelper', () => {
     test('officialMix', () => {
       const dir = 'officialMix';
       const helpers = require(inputFixturePath([type, dir]));
-      const programFunc = (pass) => {
-        console.log(pass.listUDFHelper());
-      };
+      const programFuncs = [(pass) => console.log(pass.listUDFHelper())];
 
       // @ts-ignore
-      printer({ helpers, programFunc });
+      printer({ helpers, programFuncs });
       expect((console.log as jest.Mock).mock.calls[0][0]).toMatchSnapshot();
     });
   });

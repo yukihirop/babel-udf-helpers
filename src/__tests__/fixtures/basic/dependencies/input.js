@@ -4,17 +4,17 @@ const helpers = Object.create(null);
 module.exports = helpers;
 
 helpers.dependencies = helper`
-  import child1 from "child1";
+  import child from "child";
   import child2 from "child2";
 
   export default function _dependencies(){
-    cild1() || child2()
+    child() || child2()
   };
 `;
 
-helpers.child1 = helper`
-  export default function _child1(){
-    return "child1"
+helpers.child = helper`
+  export default function _child(){
+    return "child"
   };
 `;
 

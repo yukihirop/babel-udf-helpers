@@ -6,19 +6,21 @@ import { ProgramFunc, PreFunc } from './types';
 
 type Printer = {
   helpers: UDFHelpers;
-  programFunc: ProgramFunc;
+  programFuncs: ProgramFunc[];
   preFunc?: PreFunc;
   content?: string;
 };
 
-export default function printer({ helpers, programFunc, content, preFunc }: Printer) {
+export default function printer({ helpers, programFuncs, preFunc, content }: Printer) {
   const ast: any = parser.parse(content || '', {
     sourceType: 'module',
   });
 
-  const plugin = createBabelPlugin(helpers, programFunc, preFunc);
+  const plugins = programFuncs.map((programFunc, index) =>
+    createBabelPlugin(helpers, programFunc, index, preFunc)
+  );
   const { code } = transformFromAstSync(ast, undefined, {
-    plugins: [plugin],
+    plugins,
   }) as babel.BabelFileResult;
 
   return code;

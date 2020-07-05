@@ -1,4 +1,4 @@
-function _dependencies() { cild1() || _child2(); }
+function _dependencies() { _child() || _child2(); }
 
 ;
 
@@ -10,6 +10,6 @@ function _grandchild() { return "grandchild"; }
 
 ;
 
-function _child() { return "child1"; }
+function _child() { return "child"; }
 
 ;

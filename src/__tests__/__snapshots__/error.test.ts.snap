@@ -36,19 +36,3 @@ Please see the official documentation.
 https://babeljs.io/docs/en/babel-helpers
 "
 `;
-
-exports[`addUDFHelper error core_ext babelImplemented PluginPass#addUDFHelper 1`] = `
-"unknown: 
-This tool cannot be used. officially supported.
-Please see the official documentation.
-https://babeljs.io/docs/en/babel-helpers
-"
-`;
-
-exports[`addUDFHelper error core_ext babelImplemented PluginPass#listUDFHelper 1`] = `
-"unknown: 
-This tool cannot be used. officially supported.
-Please see the official documentation.
-https://babeljs.io/docs/en/babel-helpers
-"
-`;
