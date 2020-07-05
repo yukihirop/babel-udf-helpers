@@ -77,39 +77,39 @@ describe('addUDFHelper', () => {
           test(method, () => {
             const dir = 'declaration';
             const helpers = require(inputFixturePath(['basic', dir]));
-            const programFunc = (pass) => pass.addUDFHelper('declaration');
+            const programFuncs = [(pass) => pass.addUDFHelper('declaration')];
 
             // prettier-ignore
-            expect(() => { printer({ helpers, programFunc, preFunc }); }).toThrowError(new AlreadyImplementedError(
+            expect(() => { printer({ helpers, programFuncs, preFunc }); }).toThrowError(new AlreadyImplementedError(
               `unknown:\
  \nThis tool cannot be used. officially supported.
 Please see the official documentation.
 https://babeljs.io/docs/en/babel-helpers
 `));
             // prettier-ignore
-            expect(() => { printer({ helpers, programFunc, preFunc }); }).toThrowErrorMatchingSnapshot();
+            expect(() => { printer({ helpers, programFuncs, preFunc }); }).toThrowErrorMatchingSnapshot();
           });
         }
       });
 
       test('Not found UDF helpers', () => {
-        const programFunc = (pass) => pass.addUDFHelper('objectWithoutProperties');
+        const programFuncs = [(pass) => pass.addUDFHelper('objectWithoutProperties')];
 
         // prettier-ignore
-        expect(() => { printer({ programFunc } as any); }).toThrowError(new NotFoundError('unknown: Not found UDF helpers.'));
+        expect(() => { printer({ programFuncs } as any); }).toThrowError(new NotFoundError('unknown: Not found UDF helpers.'));
         // prettier-ignore
-        expect(() => { printer({ programFunc } as any); }).toThrowErrorMatchingSnapshot();
+        expect(() => { printer({ programFuncs } as any); }).toThrowErrorMatchingSnapshot();
       });
 
       test('babelAlreadyDefined', () => {
         const dir = 'babelAlreadyDefined';
         const helpers = require(inputFixturePath([type, dir]));
-        const programFunc = (pass) => pass.addUDFHelper('objectWithoutProperties');
+        const programFuncs = [(pass) => pass.addUDFHelper('objectWithoutProperties')];
 
         // prettier-ignore
-        expect(() => { printer({ helpers, programFunc }); }).toThrowError(new AlreadyImplementedError('unknown: objectWithoutProperties cannot be used because it is supported by babel official.\nPlease change the name of the helper.'));
+        expect(() => { printer({ helpers, programFuncs }); }).toThrowError(new AlreadyImplementedError('unknown: objectWithoutProperties cannot be used because it is supported by babel official.\nPlease change the name of the helper.'));
         // prettier-ignore
-        expect(() => { printer({ helpers, programFunc }); }).toThrowErrorMatchingSnapshot();
+        expect(() => { printer({ helpers, programFuncs }); }).toThrowErrorMatchingSnapshot();
       });
     });
 
@@ -130,12 +130,12 @@ https://babeljs.io/docs/en/babel-helpers
 
         test(dir, () => {
           const helpers = require(inputFixturePath([type, dir]));
-          const programFunc = (pass) => pass.addUDFHelper(dir);
+          const programFuncs = [(pass) => pass.addUDFHelper(dir)];
 
           // prettier-ignore
-          expect(() => { printer({ helpers, programFunc }); }).toThrowError(err);
+          expect(() => { printer({ helpers, programFuncs }); }).toThrowError(err);
           // prettier-ignore
-          expect(() => { printer({ helpers, programFunc }); }).toThrowErrorMatchingSnapshot();
+          expect(() => { printer({ helpers, programFuncs }); }).toThrowErrorMatchingSnapshot();
         });
       }
     });
