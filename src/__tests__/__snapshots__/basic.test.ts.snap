@@ -3,7 +3,7 @@
 exports[`addUDFHelper basic declaration 1`] = `"function _declaration() { console.log(\\"declaration\\"); }"`;
 
 exports[`addUDFHelper basic dependencies 1`] = `
-"function _dependencies() { cild1() || _child2(); }
+"function _dependencies() { _child() || _child2(); }
 
 ;
 
@@ -15,7 +15,25 @@ function _grandchild() { return \\"grandchild\\"; }
 
 ;
 
-function _child() { return \\"child1\\"; }
+function _child() { return \\"child\\"; }
+
+;"
+`;
+
+exports[`addUDFHelper basic multi plugins 1`] = `
+"function _dependencies() { _child() || _child2(); }
+
+;
+
+function _child2() { _grandchild(); }
+
+;
+
+function _grandchild() { return \\"grandchild\\"; }
+
+;
+
+function _child() { return \\"child\\"; }
 
 ;"
 `;

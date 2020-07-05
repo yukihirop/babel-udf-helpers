@@ -27,7 +27,7 @@ describe('addUDFHelper', () => {
         const code = printer({ helpers, programFuncs });
 
         expect(code).toMatchSnapshot();
-        writeFile(outputFixturePath([type, dir]), code || '', () => {});
+        writeFile(outputFixturePath([type, dir]), code || '', () => { });
       });
     }
 
@@ -41,6 +41,17 @@ describe('addUDFHelper', () => {
 
       expect(code).toMatchSnapshot();
       writeFile(outputFixturePath([type, dir]), code || '', () => {});
+    });
+
+    test('multi plugins', () => {
+      const dir = 'dependencies';
+      const helpers = require(inputFixturePath([type, dir]));
+      const programFuncs = [(pass) => pass.addUDFHelper(dir)];
+      // @ts-ignore
+      const code = printer({ helpers, programFuncs });
+
+      expect(code).toMatchSnapshot();
+      writeFile(outputFixturePath([type, dir]), code || '', () => { });
     });
   });
 });

@@ -16,25 +16,28 @@ type GetType = {
 
 // @ts-ignore
 let fileClass = undefined;
-
-function createBuilderFile(helper: UDFHelper): babel.BabelFile {
-  // @ts-ignore
-  if (fileClass) {
-    const options = {
-      iGlobals: new Set<string>(),
-      iLocalBindingNames: new Set<string>(),
-      iDependencies: new Map<t.Identifier, string>(),
-      iImportBindingsReferences: new Array<string>(),
-      iImportPaths: new Array<string>(),
-      iExportBindingAssignments: new Array<string>(),
-      iExportName: undefined,
-      iExportPath: undefined,
-    };
-    const params = { ast: t.file(helper.ast()), code: '' };
+const fileInstanceCache = Object.create(null);
+function createBuilderFile(name: string, helper: UDFHelper): babel.BabelFile {
+  if (!fileInstanceCache[name]) {
     // @ts-ignore
-    const file = new fileClass(options, params);
-    return file;
+    if (fileClass) {
+      const options = {
+        iGlobals: new Set<string>(),
+        iLocalBindingNames: new Set<string>(),
+        iDependencies: new Map<t.Identifier, string>(),
+        iImportBindingsReferences: new Array<string>(),
+        iImportPaths: new Array<string>(),
+        iExportBindingAssignments: new Array<string>(),
+        iExportName: undefined,
+        iExportPath: undefined,
+      };
+      const params = { ast: t.file(helper.ast()), code: '' };
+      // @ts-ignore
+      const file = new fileClass(options, params);
+      fileInstanceCache[name] = file;
+    }
   }
+  return fileInstanceCache[name]
 }
 
 // MEMO:
@@ -50,7 +53,7 @@ function loadHelper(name: string) {
       });
     }
 
-    const builderFile = createBuilderFile(helper);
+    const builderFile = createBuilderFile(name, helper);
 
     // Traverse import statements and build global variable dependencies
     execDependencyResolvePlugin(builderFile);
