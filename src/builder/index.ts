@@ -16,28 +16,23 @@ type GetType = {
 
 // @ts-ignore
 let fileClass = undefined;
-const fileInstanceCache = Object.create(null);
-function createBuilderFile(name: string, helper: UDFHelper): babel.BabelFile {
-  if (!fileInstanceCache[name]) {
+function createBuilderFile(helper: UDFHelper): babel.BabelFile {
+  if (fileClass) {
+    const options = {
+      iGlobals: new Set<string>(),
+      iLocalBindingNames: new Set<string>(),
+      iDependencies: new Map<t.Identifier, string>(),
+      iImportBindingsReferences: new Array<string>(),
+      iImportPaths: new Array<string>(),
+      iExportBindingAssignments: new Array<string>(),
+      iExportName: undefined,
+      iExportPath: undefined,
+    };
+    const params = { ast: t.file(helper.ast()), code: '' };
     // @ts-ignore
-    if (fileClass) {
-      const options = {
-        iGlobals: new Set<string>(),
-        iLocalBindingNames: new Set<string>(),
-        iDependencies: new Map<t.Identifier, string>(),
-        iImportBindingsReferences: new Array<string>(),
-        iImportPaths: new Array<string>(),
-        iExportBindingAssignments: new Array<string>(),
-        iExportName: undefined,
-        iExportPath: undefined,
-      };
-      const params = { ast: t.file(helper.ast()), code: '' };
-      // @ts-ignore
-      const file = new fileClass(options, params);
-      fileInstanceCache[name] = file;
-    }
+    const file = new fileClass(options, params);
+    return file;
   }
-  return fileInstanceCache[name]
 }
 
 // MEMO:
@@ -53,14 +48,25 @@ function loadHelper(name: string) {
       });
     }
 
-    const builderFile = createBuilderFile(name, helper);
+    const builderFile = createBuilderFile(helper);
 
     // Traverse import statements and build global variable dependencies
     execDependencyResolvePlugin(builderFile);
     execReferencedResolvePlugin(builderFile);
+    const opts = builderFile.opts;
 
     helperDataCache[name] = {
       build: ({ currentId, currentDependencies, currentLocalBindingNames }) => {
+        /**
+         *
+         * A new helperBuilder instance needs to be created for each traverse,
+         * but only opts needs to be inherited.
+         * 
+         * https://github.com/babel/babel/blob/c664fbdd07d0a510d5bcb42b4d1776e9354696ad/packages/babel-helpers/src/index.js#L245-L263
+         */
+        const builderFile = createBuilderFile(helper);
+        builderFile.opts = opts;
+
         /**
          * Remove helper export default.
          * ・Remove helper import.
