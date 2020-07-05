@@ -27,7 +27,7 @@ describe('addUDFHelper', () => {
         const code = printer({ helpers, programFuncs });
 
         expect(code).toMatchSnapshot();
-        writeFile(outputFixturePath([type, dir]), code || '', () => { });
+        writeFile(outputFixturePath([type, dir]), code || '', () => {});
       });
     }
 
@@ -51,7 +51,7 @@ describe('addUDFHelper', () => {
       const code = printer({ helpers, programFuncs });
 
       expect(code).toMatchSnapshot();
-      writeFile(outputFixturePath([type, dir]), code || '', () => { });
+      writeFile(outputFixturePath([type, dir]), code || '', () => {});
     });
   });
 });

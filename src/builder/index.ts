@@ -61,7 +61,7 @@ function loadHelper(name: string) {
          *
          * A new helperBuilder instance needs to be created for each traverse,
          * but only opts needs to be inherited.
-         * 
+         *
          * https://github.com/babel/babel/blob/c664fbdd07d0a510d5bcb42b4d1776e9354696ad/packages/babel-helpers/src/index.js#L245-L263
          */
         const builderFile = createBuilderFile(helper);
