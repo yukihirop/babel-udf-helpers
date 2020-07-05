@@ -23,30 +23,6 @@ describe('addUDFHelper', () => {
         // prettier-ignore
         const cases = [
           {
-            method: 'PluginPass#addUDFHelper',
-            preFunc: (pass, helpers) => {
-              try {
-                pass.constructor.prototype.addUDFHelper = function () { };
-                useDangerousUDFHelpers(pass, helpers);
-              } catch (e) {
-                pass.constructor.prototype.addUDFHelper = undefined;
-                throw e
-              }
-            }
-          },
-          {
-            method: 'PluginPass#listUDFHelper',
-            preFunc: (pass, helpers) => {
-              try {
-                pass.constructor.prototype.listUDFHelper = function () { };
-                useDangerousUDFHelpers(pass, helpers);
-              } catch (e) {
-                pass.constructor.prototype.listUDFHelper = undefined;
-                throw e
-              }
-            }
-          },
-          {
             method: 'BabelFile#addUDFHelper',
             preFunc: (pass, helpers) => {
               try {
