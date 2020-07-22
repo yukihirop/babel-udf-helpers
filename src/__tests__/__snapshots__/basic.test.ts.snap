@@ -21,7 +21,23 @@ function _child() { return \\"child\\"; }
 `;
 
 exports[`addUDFHelper basic multi plugins 1`] = `
-"function _dependencies() { _child() || _child2(); }
+"function _dependencies2() { _child3() || _child4(); }
+
+;
+
+function _child4() { _grandchild2(); }
+
+;
+
+function _grandchild2() { return \\"grandchild\\"; }
+
+;
+
+function _child3() { return \\"child\\"; }
+
+;
+
+function _dependencies() { _child() || _child2(); }
 
 ;
 
@@ -37,6 +53,8 @@ function _child() { return \\"child\\"; }
 
 ;"
 `;
+
+exports[`addUDFHelper basic multi plugins 2`] = `"UDF helper: 'dependencies' is used in babel-udf-helpers-test-0, babel-udf-helpers-test-1"`;
 
 exports[`addUDFHelper basic rename 1`] = `
 "function _rename2() { console.log(\\"rename\\"); }

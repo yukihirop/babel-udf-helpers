@@ -6,7 +6,7 @@ import { UDFHelperList } from '../types';
 
 // MEMO:
 // binding to an instance of BabelFile
-export function addUDFHelper(name: string): t.Identifier {
+export function addUDFHelper(name: string): t.Identifier | Array<t.Identifier> {
   let isAlreadyExist;
 
   /**
@@ -25,32 +25,75 @@ export function addUDFHelper(name: string): t.Identifier {
       `${name} cannot be used because it is supported by babel official.\nPlease change the name of the helper.`
     );
 
-  const declar = this.declarations[name];
-  if (declar) return t.cloneNode(declar);
+  const usedPlugins = (heleprUsedMap()[name] && Array.from(heleprUsedMap()[name])) || [];
+
+  if (usedPlugins.length > 1) {
+    console.warn(`UDF helper: '${name}' is used in ${usedPlugins.join(', ')}`);
+  } else if (usedPlugins.length === 0) {
+    throw new ReferenceError(`Unknown UDF helper ${name}`);
+  }
+
+  const duplicated = {};
+  const result = Array.from(usedPlugins).map((pluginName: string) => {
+    const uid = _addUDFHelper(this, pluginName, name, duplicated);
+    const helperName = uid.name.replace(/^\_/, '');
+    duplicated[helperName] = duplicated[helperName] || new Set();
+    duplicated[helperName].add(pluginName);
+    return uid;
+  });
+
+  if (result.length === 1) {
+    return result[0];
+  } else {
+    return result;
+  }
+}
+
+function heleprUsedMap(): any {
+  return Object.keys(helpersStore).reduce((acc, pluginName) => {
+    (Object.keys(helpersStore[pluginName]) as any).forEach((helperName: string) => {
+      acc[helperName] = acc[helperName] || new Set();
+      acc[helperName].add(pluginName);
+    });
+    return acc;
+  }, {});
+}
+
+function _addUDFHelper(file: any, pluginName: string, name: string, duplicated: any): t.Identifier {
+  const isduplicated = duplicated[name] && duplicated[name].size >= 1;
+  const declar = file.declarations[name];
+
+  if (declar && !isduplicated) return t.cloneNode(declar);
 
   // make sure that the helper exists
   // this.constructor is babel.BabelFile class
-  builder.ensure(name, this.constructor);
+  builder.ensure(pluginName, name, file.constructor);
 
-  const uid = (this.declarations[name] = this.scope.generateUidIdentifier(name));
+  const uid = (file.declarations[name] = file.scope.generateUidIdentifier(name));
 
   const dependencies = {};
-  for (const dep of builder.getDependencies(name)) {
-    dependencies[dep] = this.addUDFHelper(dep);
+  for (const dep of builder.getDependencies(pluginName, name)) {
+    const childUid = _addUDFHelper(file, pluginName, dep, duplicated);
+    const childHelperName = childUid.name.replace(/^\_/, '');
+    duplicated[childHelperName] = duplicated[childHelperName] || new Set();
+    duplicated[childHelperName].add(pluginName);
+
+    dependencies[dep] = childUid;
   }
 
   const { nodes, globals } = builder.buildProgram({
+    pluginName,
     name,
     currentId: uid,
     currentDependencies: dependencies,
-    currentLocalBindingNames: Object.keys(this.scope.getAllBindings()),
+    currentLocalBindingNames: Object.keys(file.scope.getAllBindings()),
   });
 
   // MEMO:
   // Rename if global variables overlap
   globals.forEach((name: string) => {
-    if (this.path.scope.hasBinding(name, true /* noGlobals */)) {
-      this.path.scope.rename(name);
+    if (file.path.scope.hasBinding(name, true /* noGlobals */)) {
+      file.path.scope.rename(name);
     }
   });
 
@@ -61,12 +104,12 @@ export function addUDFHelper(name: string): t.Identifier {
     node._compact = true;
   });
 
-  this.path.unshiftContainer('body', nodes);
+  file.path.unshiftContainer('body', nodes);
   // MEMO:
   // NodePath# is not automatically registered in bindings, so the following code is required
-  this.path.get('body').forEach((path) => {
+  file.path.get('body').forEach((path) => {
     if (nodes.indexOf(path.node) === -1) return;
-    if (path.isVariableDeclaration()) this.scope.registerDeclaration(path);
+    if (path.isVariableDeclaration()) file.scope.registerDeclaration(path);
   });
 
   return uid;
@@ -75,7 +118,13 @@ export function addUDFHelper(name: string): t.Identifier {
 // MEMO:
 // binding to an instance of BabelFile
 export function listUDFHelper(): UDFHelperList {
-  return Object.keys(helpersStore).reduce(
+  const loadedHelpers = Object.values(helpersStore).reduce((acc, data_when_plugin) => {
+    const helpers: string[] = Object.keys(data_when_plugin);
+    acc.push(...helpers);
+    return acc;
+  }, [] as string[]);
+
+  return loadedHelpers.reduce(
     (acc: UDFHelperList, name: string) => {
       let isAlreadyExist;
 

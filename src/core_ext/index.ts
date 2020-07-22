@@ -31,12 +31,12 @@ https://babeljs.io/docs/en/babel-helpers
        * but babel.BabelFile behaves like being reused.
        *
        */
-      setHelpersInStore(opts);
+      setHelpersInStore(pass, opts);
       defineUDFHelpersFuncForPluginPass(pass);
       return;
     }
   } else {
-    setHelpersInStore(opts);
+    setHelpersInStore(pass, opts);
 
     Object.defineProperty(pass.file, '__use_babel_udf_helpers__', {
       enumerable: true,
@@ -77,7 +77,7 @@ function defineUDFHelpersFuncForPluginPass(pass: babel.PluginPass): void {
   });
 }
 
-function setHelpersInStore(opts: UDFUsePluginOptions): void {
+function setHelpersInStore(pass, opts: UDFUsePluginOptions): void {
   const helpers = opts['helpers'];
   if (helpers) {
     /**
@@ -86,7 +86,10 @@ function setHelpersInStore(opts: UDFUsePluginOptions): void {
      * import * as helpers from './helpers'
      * import helpers from './helpers'
      */
-    Object.assign(helpersStore, helpers.default ? helpers.default : helpers);
+    const namespacedHelpers = {
+      [pass.key]: helpers.default ? helpers.default : helpers,
+    };
+    Object.assign(helpersStore, namespacedHelpers);
   } else {
     throw new NotFoundError('Not found UDF helpers.');
   }

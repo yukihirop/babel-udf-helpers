@@ -45,7 +45,7 @@ The return type is `t.Identifier`.
 ### definition
 
 ```ts
-addUDFHelper(name: string): t.Identifier
+addUDFHelper(name: string): t.Identifier | Array<t.Identifier>
 ```
 
 ### example
@@ -53,11 +53,17 @@ addUDFHelper(name: string): t.Identifier
 ```ts
 visitor: {
   Program(path){
-    // e.g.) identifier is { type: 'identifier', name: '_programHelper' }
+    // e.g.) identifier is { type: 'Identifier', name: '_programHelper' }
+    // e.g.) identifier is [{ type: 'Identifier', name: '_programHelper' }, { type: 'Identifier', name: '_programHelper2' }]
     const identifier = this.addUDFHelper("programHelper")
   }
 }
 ```
+
+::: danger Remark
+If the result comes back in an array, it means that a helper with the same name is defined between plugins.
+We recommend changing the name of the helper if possible.
+:::
 
 ## listUDFHelper
 

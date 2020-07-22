@@ -8,6 +8,7 @@ import {
 import { UDFHelper } from '../types';
 
 type GetType = {
+  pluginName: string;
   name: string;
   currentId?: t.Identifier;
   currentDependencies?: { [key: string]: t.Identifier };
@@ -16,7 +17,7 @@ type GetType = {
 
 // @ts-ignore
 let fileClass = undefined;
-function createBuilderFile(helper: UDFHelper): babel.BabelFile {
+function createBuilderFile(pluginName: string, helper: UDFHelper): babel.BabelFile {
   if (fileClass) {
     const options = {
       iGlobals: new Set<string>(),
@@ -27,6 +28,7 @@ function createBuilderFile(helper: UDFHelper): babel.BabelFile {
       iExportBindingAssignments: new Array<string>(),
       iExportName: undefined,
       iExportPath: undefined,
+      iPluginName: pluginName,
     };
     const params = { ast: t.file(helper.ast()), code: '' };
     // @ts-ignore
@@ -38,9 +40,11 @@ function createBuilderFile(helper: UDFHelper): babel.BabelFile {
 // MEMO:
 // The helperDataCache cannot be hoisted, so the valid objects below are
 const helperDataCache = Object.create(null);
-function loadHelper(name: string) {
-  if (!helperDataCache[name]) {
-    const helper = helpersStore[name];
+function loadHelper(pluginName: string, name: string) {
+  helperDataCache[pluginName] = helperDataCache[pluginName] || {};
+
+  if (!helperDataCache[pluginName][name]) {
+    const helper = helpersStore[pluginName][name];
     if (!helper) {
       throw Object.assign(new ReferenceError(`Unknown helper ${name}`), {
         code: 'BABEL_UDF_HELPER_UNKNOWN',
@@ -48,14 +52,14 @@ function loadHelper(name: string) {
       });
     }
 
-    const builderFile = createBuilderFile(helper);
+    const builderFile = createBuilderFile(pluginName, helper);
 
     // Traverse import statements and build global variable dependencies
     execDependencyResolvePlugin(builderFile);
     execReferencedResolvePlugin(builderFile);
     const opts = builderFile.opts;
 
-    helperDataCache[name] = {
+    helperDataCache[pluginName][name] = {
       build: ({ currentId, currentDependencies, currentLocalBindingNames }) => {
         /**
          *
@@ -64,7 +68,7 @@ function loadHelper(name: string) {
          *
          * https://github.com/babel/babel/blob/c664fbdd07d0a510d5bcb42b4d1776e9354696ad/packages/babel-helpers/src/index.js#L245-L263
          */
-        const builderFile = createBuilderFile(helper);
+        const builderFile = createBuilderFile(pluginName, helper);
         builderFile.opts = opts;
 
         /**
@@ -90,20 +94,25 @@ function loadHelper(name: string) {
       dependencies: () => builderFile.opts['iDependencies'],
     };
   }
-  return helperDataCache[name];
+  return helperDataCache[pluginName][name];
 }
 
-export function getDependencies(name: string): string[] {
-  return loadHelper(name).dependencies().values();
+export function getDependencies(pluginName: string, name: string): string[] {
+  return loadHelper(pluginName, name).dependencies().values();
 }
 
 export function buildProgram({
+  pluginName,
   name,
   currentId,
   currentDependencies,
   currentLocalBindingNames,
 }: GetType) {
-  return loadHelper(name).build({ currentId, currentDependencies, currentLocalBindingNames });
+  return loadHelper(pluginName, name).build({
+    currentId,
+    currentDependencies,
+    currentLocalBindingNames,
+  });
 }
 
 /**
@@ -112,8 +121,8 @@ export function buildProgram({
  *  ・Setting the builder class to build the helper.
  *  ・Setting dependencies (global) when renaming etc. are not considered.
  */
-export function ensure(name: string, builderFileClass: babel.BabelFile) {
+export function ensure(pluginName: string, name: string, builderFileClass: babel.BabelFile) {
   // @ts-ignore
   if (!fileClass) fileClass = builderFileClass;
-  loadHelper(name);
+  loadHelper(pluginName, name);
 }

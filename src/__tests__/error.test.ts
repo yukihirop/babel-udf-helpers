@@ -92,7 +92,7 @@ https://babeljs.io/docs/en/babel-helpers
     describe('DependencyResolvePlugin', () => {
       // prettier-ignore
       const cases = [
-        { dir: 'doNotExist', err: new ReferenceError('unknown: Unknown helper doNotExist') },
+        { dir: 'doNotExist', err: new ReferenceError('unknown: Unknown UDF helper doNotExist') },
         { dir: 'importNamed', err: new SyntaxError('unknown: UDF Helpers can only import a default value (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'doNotGiveName', err: new SyntaxError('unknown: UDF Helpers should give names to their exported func declaration (This is an error on an internal node. Probably an internal error.)') },
         { dir: 'expression', err: new SyntaxError('unknown: UDF Helpers must be a function declaration (This is an error on an internal node. Probably an internal error.)') },
