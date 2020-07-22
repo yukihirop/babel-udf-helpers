@@ -31,6 +31,7 @@ https://babeljs.io/docs/en/babel-helpers
        * but babel.BabelFile behaves like being reused.
        *
        */
+      setHelpersInStore(opts);
       defineUDFHelpersFuncForPluginPass(pass);
       return;
     }
