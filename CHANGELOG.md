@@ -1,5 +1,13 @@
 ## Change Log
 
+## v1.0.3
+
+2020-07-23
+
+- [`Fix Bugs`] Fix Helper loading/helper name duplication problem ([#32](https://github.com/yukihirop/babel-udf-helpers/pull/32))
+
+Please see [milestones](https://github.com/yukihirop/babel-udf-helpers/milestone/2?closed=1)
+
 ## v1.0.2
 
 2020-07-06
