@@ -51,6 +51,7 @@ describe('addUDFHelper', () => {
       const code = printer({ helpers, programFuncs });
 
       expect(code).toMatchSnapshot();
+      expect((console.warn as jest.Mock).mock.calls[0][0]).toMatchSnapshot();
       writeFile(outputFixturePath([type, dir]), code || '', () => {});
     });
   });

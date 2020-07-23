@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`addUDFHelper error DependencyResolvePlugin doNotExist 1`] = `"unknown: Unknown helper doNotExist"`;
+exports[`addUDFHelper error DependencyResolvePlugin doNotExist 1`] = `"unknown: Unknown UDF helper doNotExist"`;
 
 exports[`addUDFHelper error DependencyResolvePlugin doNotExportDefault 1`] = `"unknown: UDF Helpers must default-export something."`;
 

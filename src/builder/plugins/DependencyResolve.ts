@@ -5,14 +5,14 @@ import { helpers as helpersStore } from '../../store';
 
 export default function DependencyResolve(file: babel.BabelFile, options?: UDFPluginOptions): void {
   const { opts } = file;
-  const { iDependencies, iImportPaths } = opts as any;
+  const { iDependencies, iImportPaths, iPluginName } = opts as any;
 
   const visitor = {
     ImportDeclaration(path: NodePath) {
       // @ts-ignore
       const name = path.node.source.value;
 
-      if (!helpersStore[name]) {
+      if (!helpersStore[iPluginName][name]) {
         throw new ReferenceError(`Unknown UDF helper ${name}`);
       }
 

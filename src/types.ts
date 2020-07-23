@@ -8,7 +8,9 @@ export type UDFHelper = {
   ast: () => t.Program;
 };
 export type UDFHelpers = {
-  [key: string]: UDFHelper;
+  [key: string]: {
+    [key: string]: UDFHelper;
+  };
 };
 export type UDFHelperList = {
   available: string[];

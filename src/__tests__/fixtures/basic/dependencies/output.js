@@ -1,3 +1,19 @@
+function _dependencies2() { _child3() || _child4(); }
+
+;
+
+function _child4() { _grandchild2(); }
+
+;
+
+function _grandchild2() { return "grandchild"; }
+
+;
+
+function _child3() { return "child"; }
+
+;
+
 function _dependencies() { _child() || _child2(); }
 
 ;
