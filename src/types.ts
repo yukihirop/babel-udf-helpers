@@ -8,6 +8,9 @@ export type UDFHelper = {
   ast: () => t.Program;
 };
 export type UDFHelpers = {
+  [key: string]: UDFHelper;
+};
+export type UDFNamespacedHelpers = {
   [key: string]: {
     [key: string]: UDFHelper;
   };
