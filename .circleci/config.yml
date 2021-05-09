@@ -5,7 +5,7 @@ orbs:
 executors:
   nodelts:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:15
 jobs:
   build-and-test:
     executor: nodelts
