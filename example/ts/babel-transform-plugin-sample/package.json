@@ -15,7 +15,7 @@
     "@types/babel__core": "7.1.9",
     "@types/babel__traverse": "7.0.12",
     "@types/jest": "26.0.3",
-    "babel-plugin-tester": "9.2.0",
+    "babel-plugin-tester": "10.1.0",
     "babel-udf-helpers": "../../../lib",
     "jest": "26.1.0",
     "prettier": "2.0.5",
