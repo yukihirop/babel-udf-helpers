@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Define UDF Helpers | babel-udf-heleprs</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    
+    <meta name="description" content="Provides methods for using UDF Helpers in Babel plugin development">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/babel-udf-helpers/assets/css/0.styles.c7b25c37.css" as="style"><link rel="preload" href="/babel-udf-helpers/assets/js/app.8acddd74.js" as="script"><link rel="preload" href="/babel-udf-helpers/assets/js/2.09334978.js" as="script"><link rel="preload" href="/babel-udf-helpers/assets/js/7.e634eb83.js" as="script"><link rel="prefetch" href="/babel-udf-helpers/assets/js/10.5b7b75d2.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/3.c65c2fcb.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/4.4fca55e2.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/5.b9dd8a3c.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/6.60eac9de.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/8.c044b2a5.js"><link rel="prefetch" href="/babel-udf-helpers/assets/js/9.0e03645b.js">
+    <link rel="stylesheet" href="/babel-udf-helpers/assets/css/0.styles.c7b25c37.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/babel-udf-helpers/" class="home-link router-link-active"><!----> <span class="site-name">babel-udf-heleprs</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/babel-udf-helpers/" class="nav-link">
+  Home
+</a></div> <a href="https://github.com/yukihirop/babel-udf-helpers" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/babel-udf-helpers/" class="nav-link">
+  Home
+</a></div> <a href="https://github.com/yukihirop/babel-udf-helpers" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/babel-udf-helpers/" aria-current="page" class="sidebar-link">Home</a></li><li><a href="/babel-udf-helpers/motivation/" class="sidebar-link">Motivation</a></li><li><a href="/babel-udf-helpers/usage/" class="sidebar-link">Usage</a></li><li><a href="/babel-udf-helpers/api/" class="sidebar-link">API</a></li><li><a href="/babel-udf-helpers/define-udf-helpers/" aria-current="page" class="active sidebar-link">Define UDF Helpers</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/babel-udf-helpers/define-udf-helpers/#preparation" class="sidebar-link">Preparation</a></li><li class="sidebar-sub-header"><a href="/babel-udf-helpers/define-udf-helpers/#syntax" class="sidebar-link">Syntax</a></li><li class="sidebar-sub-header"><a href="/babel-udf-helpers/define-udf-helpers/#example" class="sidebar-link">Example</a></li><li class="sidebar-sub-header"><a href="/babel-udf-helpers/define-udf-helpers/#best-practice" class="sidebar-link">Best Practice</a></li></ul></li><li><a href="/babel-udf-helpers/error-handling/" class="sidebar-link">Error Handling</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="define-udf-helpers"><a href="#define-udf-helpers" class="header-anchor">#</a> Define UDF Helpers</h1> <p>Define it the same as babel-helpers.<br>
+The specifications are the same as for babel-helpers.</p> <blockquote><ul><li>They must have a default export, which is their entry-point.</li> <li>They can import other helpers, exclusively by using default imports.</li> <li>They can't have named exports.</li></ul></blockquote> <p><a href="https://babeljs.io/docs/en/babel-helpers#defining-helpers" target="_blank" rel="noopener noreferrer">@babel/helpers<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="preparation"><a href="#preparation" class="header-anchor">#</a> Preparation</h2> <p>Be sure to write the following in the <code>helpers</code> file.<br>
+We will define helpers in the properties of <code>helpers</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> helper <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-udf-helpers'</span>
+
+<span class="token keyword">const</span> helpers <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> helpers<span class="token punctuation">;</span>
+
+<span class="token comment">/** We will define the helper from here　*/</span>
+</code></pre></div><h2 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h2> <p>The basic helper looks like this:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> helper <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-udf-helpers'</span>
+
+<span class="token keyword">const</span> helpers <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> helpers<span class="token punctuation">;</span>
+
+<span class="token comment">/** We will define the helper from here　*/</span>
+
+helpers<span class="token punctuation">.</span><span class="token operator">&lt;</span>helperName<span class="token operator">&gt;</span> <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  import &lt;depHelperName1&gt; from '&lt;depHelperName1&gt;'
+  import &lt;depHelperName2&gt; from '&lt;depHelperName2&gt;'
+
+  export default function _&lt;helperName&gt;(){
+    &lt;depHelperName1&gt;();
+    &lt;depHelperName2&gt;();
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span><span class="token operator">&lt;</span>depHelperName1<span class="token operator">&gt;</span> <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  export default function _&lt;depHelperName1&gt;(){
+    /** something */
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span><span class="token operator">&lt;</span>depHelperName2<span class="token operator">&gt;</span> <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  export default function _&lt;depHelperName2&gt;(){
+    /** something */
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="example"><a href="#example" class="header-anchor">#</a> Example</h2> <h3 id="good"><a href="#good" class="header-anchor">#</a> Good</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> helper <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-udf-helpers'</span>
+
+<span class="token keyword">const</span> helpers <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> helpers<span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span>customHelper <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  import dep from &quot;dependency&quot;;
+
+  const foo = 2;
+
+  export default function _customHelper(x) {
+    return foo * dep() + x;
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span>dependency <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  export default function _dependency(){
+    return 10;
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">Good Point</p> <ul><li>helpers have a default export, which is their entry-point.</li> <li>You are importing other helpers exclusively by using the default import.</li> <li>You are not using named exports.</li></ul></div> <h3 id="bad"><a href="#bad" class="header-anchor">#</a> Bad</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> helper <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-udf-helpers'</span>
+
+<span class="token keyword">const</span> helpers <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> helpers<span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span>customHelper <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  import { dep } from 'dependency1';
+  import dep2 from 'dependency2';
+
+  const foo = 2;
+
+  export default function _customHelper(x) {
+    return foo * dep() + x;
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span>dependency1 <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  export default function _dependency1(){
+    return {
+      dep: function(){}
+    }
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+helpers<span class="token punctuation">.</span>dependency2 <span class="token operator">=</span> helper<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  function _dependency2(){
+    return {}
+  };
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+</code></pre></div><div class="custom-block danger"><p class="custom-block-title">Bad Point</p> <ul><li>Dependency import is not ImportDefaultDeclaration.</li> <li>You are importing a dependency that is not export default.</li></ul></div> <h2 id="best-practice"><a href="#best-practice" class="header-anchor">#</a> Best Practice</h2> <p>The most efficient way to understand helpers is to look at the <a href="https://github.com/babel/babel/blob/main/packages/babel-helpers/src/helpers.js" target="_blank" rel="noopener noreferrer">code in @babel/helpers<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/23/2021, 4:51:36 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/babel-udf-helpers/api/" class="prev">
+        API
+      </a></span> <span class="next"><a href="/babel-udf-helpers/error-handling/">
+        Error Handling
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/babel-udf-helpers/assets/js/app.8acddd74.js" defer></script><script src="/babel-udf-helpers/assets/js/2.09334978.js" defer></script><script src="/babel-udf-helpers/assets/js/7.e634eb83.js" defer></script>
+  </body>
+</html>
