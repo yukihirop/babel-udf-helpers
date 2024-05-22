@@ -13,7 +13,7 @@
     "@babel/core": "7.10.4",
     "@babel/types": "7.10.4",
     "@types/babel__core": "7.1.9",
-    "@types/babel__traverse": "7.0.12",
+    "@types/babel__traverse": "7.20.6",
     "@types/jest": "26.0.3",
     "babel-plugin-tester": "9.2.0",
     "babel-udf-helpers": "../../../lib",
