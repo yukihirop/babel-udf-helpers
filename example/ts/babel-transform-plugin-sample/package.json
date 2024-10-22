@@ -10,8 +10,8 @@
     "fmt": "prettier --write **/src/**/*.ts"
   },
   "devDependencies": {
-    "@babel/core": "7.10.4",
-    "@babel/types": "7.10.4",
+    "@babel/core": "7.25.9",
+    "@babel/types": "7.25.9",
     "@types/babel__core": "7.1.9",
     "@types/babel__traverse": "7.0.12",
     "@types/jest": "26.0.3",
