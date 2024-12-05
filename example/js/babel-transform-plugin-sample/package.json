@@ -9,9 +9,9 @@
     "build": "babel src/index.js -o lib/index.js"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.4",
-    "@babel/core": "7.10.4",
-    "@babel/preset-env": "7.10.4",
+    "@babel/cli": "7.26.4",
+    "@babel/core": "7.26.0",
+    "@babel/preset-env": "7.26.0",
     "babel-plugin-tester": "9.2.0",
     "babel-udf-helpers": "../../../lib",
     "jest": "26.1.0",
